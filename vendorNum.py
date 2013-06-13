@@ -32,4 +32,19 @@ ContactNum = cursor.execute("""SELECT name, phone_number
                   LIMIT 5""",
                (name, clue_threshold))
 
+cursor.execute(ContactNum)
+
+def FetchOneAssoc(cursor) :
+    data = cursor.fetchone()
+    if data == None :
+        return None
+    desc = cursor.description
+
+    dict = {}
+
+    for (name, value) in zip(desc, data) :
+        dict[name[0]] = value
+
+    return dict
+
 MySQLdb.close()
